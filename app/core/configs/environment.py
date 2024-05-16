@@ -25,10 +25,6 @@ class Environment(BaseSettings):
     DATABASE_MIN_CONNECTIONS: int = 1
     DATABASE_MAX_CONNECTIONS: int = 1
 
-    # REDIS
-    REDIS_HOST: str
-    REDIS_PORT: str
-
     # S3
     BUCKET_BASE_URL: str = "localhost"
     BUCKET_ACCESS_KEY_ID: str = "test"
@@ -36,9 +32,6 @@ class Environment(BaseSettings):
     BUCKET_NAME: str = "test"
     BUCKET_ACL: str = "test"
     BUCKET_URL_EXPIRES_IN_SECONDS: int = 0
-
-    GREY_WOLF_URL: str
-    ADDRESS_SERVICES_URL: str
 
     class Config:
         """Load config file"""

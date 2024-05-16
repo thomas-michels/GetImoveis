@@ -45,25 +45,25 @@ async def search_all_properties(
 
     return JSONResponse(jsonable_encoder({"count": quantity, "data": properties}))
 
-@router.get("/export/csv")
-async def search_all_properties_in_csv(model_id: int, services: PropertyServices = Depends(property_composer)):
-    file_url = await services.export_to_csv(model_id=model_id)
+# @router.get("/export/csv")
+# async def search_all_properties_in_csv(model_id: int, services: PropertyServices = Depends(property_composer)):
+#     file_url = await services.export_to_csv(model_id=model_id)
 
-    if not file_url:
-        raise HTTPException(status_code=404, detail="Not found")
+#     if not file_url:
+#         raise HTTPException(status_code=404, detail="Not found")
 
-    data = {"file_url": file_url}
-    return JSONResponse(jsonable_encoder(data))
+#     data = {"file_url": file_url}
+#     return JSONResponse(jsonable_encoder(data))
 
-@router.post("/price/predict")
-async def predict_price(
-    predict_price: PredictProperty,
-    model_id: int = None,
-    services: PropertyServices = Depends(property_composer)
-):
-    predicted_property = await services.predict_price(predict_property=predict_price, model_id=model_id)
+# @router.post("/price/predict")
+# async def predict_price(
+#     predict_price: PredictProperty,
+#     model_id: int = None,
+#     services: PropertyServices = Depends(property_composer)
+# ):
+#     predicted_property = await services.predict_price(predict_property=predict_price, model_id=model_id)
 
-    if not predicted_property:
-        raise HTTPException(status_code=404, detail="Not found")
+#     if not predicted_property:
+#         raise HTTPException(status_code=404, detail="Not found")
 
-    return predicted_property
+#     return predicted_property

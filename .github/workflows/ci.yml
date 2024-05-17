@@ -30,5 +30,4 @@ jobs:
       - name: Build, tag
         run: |
           docker build -t ${{ vars.DOCKER_USERNAME }}/${{ vars.MY_REPOSITORY_NAME }}:${{ github.sha }} .
-          docker images
           docker push ${{ vars.DOCKER_USERNAME }}/${{ vars.MY_REPOSITORY_NAME }}:${{ github.sha }}

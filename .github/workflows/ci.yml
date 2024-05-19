@@ -27,11 +27,6 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ vars.DOCKER_TOKEN }}
 
-      - name: Debug Environment Variables
-        run: |
-            echo "DOCKER_USERNAME=${{ vars.DOCKER_USERNAME }}"
-            echo "REPOSITORY_NAME=${{ vars.MY_REPOSITORY_NAME }}"
-
       - name: Build, tag
         run: |
           docker build -t ${{ vars.DOCKER_USERNAME }}/${{ vars.MY_REPOSITORY_NAME }}:${{ github.sha }} .

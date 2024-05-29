@@ -13,6 +13,7 @@ class Environment(BaseSettings):
     # APPLICATION
     APPLICATION_HOST: str = "localhost"
     APPLICATION_PORT: int = 8000
+    SECRET_KEY: str = ""
 
     # DATABASE
     DATABASE_URL: str = "localhost:5432"

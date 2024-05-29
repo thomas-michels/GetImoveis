@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Security
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import HTTPException
 from app.api.composers import property_composer
+from app.api.dependencies.authenticate import user_authentication
+from app.core.entities.user import UserInDB
 from app.core.services import PropertyServices
 from app.api.shared_schemas import PredictProperty, PredictedProperty
 
@@ -10,7 +12,11 @@ router = APIRouter(prefix="/properties", tags=["Property"])
 
 
 @router.get("/{property_id}")
-async def search_property_by_id(property_id: int, services: PropertyServices = Depends(property_composer)):
+async def search_property_by_id(
+    property_id: int,
+    services: PropertyServices = Depends(property_composer),
+    user_authentication: UserInDB = Security(user_authentication, scopes="")
+):
     property_in_db = await services.search_by_id(property_id=property_id)
 
     if not property_in_db:
@@ -27,7 +33,8 @@ async def search_all_properties(
     parking_space: int = Query(default=None),
     size: int = Query(default=None),
     zip_code: str = Query(default=None),
-    services: PropertyServices = Depends(property_composer)
+    services: PropertyServices = Depends(property_composer),
+    user_authentication: UserInDB = Security(user_authentication, scopes="")
 ):
     properties = await services.search_all(
         page_size=page_size,
